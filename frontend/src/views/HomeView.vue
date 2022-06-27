@@ -1,15 +1,27 @@
 <template>
-  <helloWorld></helloWorld>
+  <div class="h-screen flex align-items-center justify-content-center">
+    <div
+      class="surface-900 shadow-2 p-3 opacity-90 w-9 h-30rem border-round-2xl text-white text-2xl text-center"
+    >
+      <router-view></router-view>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
-import HelloWorld from "@/components/HelloWorld.vue";
+import { defineComponent } from "vue";
 
-@Options({
-  components: {
-    HelloWorld,
+export default defineComponent({
+  setup() {
+    return;
   },
-})
-export default class HomeView extends Vue {}
+});
 </script>
+<style>
+body {
+  background-image: url("@/assets/background.jpeg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+</style>
