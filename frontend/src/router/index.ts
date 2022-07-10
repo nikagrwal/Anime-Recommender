@@ -4,19 +4,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "home",
-    component: import("@/views/HomeView.vue"),
-    children: [
-      {
-        path: "",
-        name: "LandingContainer",
-        component: () => import("@/components/LandingPage.vue"),
-      },
-      {
-        path: "like/:user",
-        name: "SelectContainer",
-        component: () => import("@/components/SelectLikeAnime.vue"),
-      },
-    ],
+    component: import("@/views/HomePage.vue"),
   },
 ];
 
