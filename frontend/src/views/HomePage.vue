@@ -60,7 +60,6 @@
                       placeholder="Rate"
                       @change="
                         addData(
-                          formValues.user1,
                           selectedAnimeUser1[index].Name,
                           rating_User1[index]
                         )
@@ -117,7 +116,6 @@
                       placeholder="Rate"
                       @change="
                         addData(
-                          formValues.user2,
                           selectedAnimeUser2[index].Name,
                           rating_User2[index]
                         )
@@ -136,7 +134,10 @@
       <div
         class="flex-grow-1 flex align-items-center justify-content-center bg-blue-800 font-bold text-white m-2 px-5 py-3 border-round"
       >
-        <ButtonComponent label="Get Recommendation"></ButtonComponent>
+        <ButtonComponent
+          label="Get Recommendation"
+          @click="recommender(user_anime_data)"
+        ></ButtonComponent>
       </div>
     </div>
     <div
@@ -144,9 +145,7 @@
     >
       <div
         class="flex-grow-1 opacity-40 flex align-items-center justify-content-center bg-blue-500 font-bold text-white m-2 px-5 py-3 border-round"
-      >
-        Date Night Recommender
-      </div>
+      ></div>
     </div>
   </div>
 </template>
@@ -172,8 +171,8 @@ export default defineComponent({
 
     const animes = ref<Anime[]>([]);
 
-    const addData = (user: string, animeName: string, rating: number) => {
-      const data = { user, animeName, rating };
+    const addData = (animeName: string, rating: number) => {
+      const data = { animeName, rating };
       user_anime_data.value.push(data);
     };
 
@@ -191,7 +190,7 @@ export default defineComponent({
     ]);
 
     const animeOption = async () => {
-      const url = `http://localhost:3000/anime`;
+      const url = `http://127.0.0.1:5555/api/animes`;
 
       try {
         const { data } = await axios.get(url);
@@ -202,9 +201,11 @@ export default defineComponent({
     };
 
     const selectedAnimeLength = (selectedAnime: any) => {
-      console.log(JSON.stringify(selectedAnime));
-      console.log(selectedAnime.length);
       if (selectedAnime.length === 6) return true;
+    };
+
+    const recommender = async (data: User[]) => {
+      return data;
     };
 
     animeOption();
@@ -221,6 +222,7 @@ export default defineComponent({
       selectedAnimeLength,
       rating_User1,
       rating_User2,
+      recommender,
     };
   },
 });
